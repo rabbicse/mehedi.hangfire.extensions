@@ -19,6 +19,11 @@ Or via the .NET Core command line interface:
 
 Either commands, from Package Manager Console or .NET Core CLI, will download and install package and all required dependencies.
 
+## Dependencies
+- net8.0
+- Hangfire.Core (>= 1.8.12)
+- MediatR (>= 12.2.0)
+
 ## References
 - [Hangfire](https://www.hangfire.io/)
 - [Using Hangfire and MediatR as a Message Dispatcher](https://codeopinion.com/using-hangfire-and-mediatr-as-a-message-dispatcher/)
