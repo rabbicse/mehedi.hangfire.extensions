@@ -1,3 +1,6 @@
+[![Nuget](https://img.shields.io/nuget/v/Mehedi.Hangfire.Extensions)](https://www.nuget.org/packages/Mehedi.Hangfire.Extensions/)
+[![Nuget](https://img.shields.io/nuget/dt/Mehedi.Hangfire.Extensions)](https://www.nuget.org/packages/Mehedi.Hangfire.Extensions/)
+
 # Mehedi.Hangfire.Extensions
 Useful extension methods to be able to use Hangfire to create background jobs. 
 
