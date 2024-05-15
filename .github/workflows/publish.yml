@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main # Your default release branch
+      - master # Your default release branch
     paths:
       - 'src/Mehedi.Hangfire.Extensions/**'
 jobs:
