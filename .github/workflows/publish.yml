@@ -47,8 +47,7 @@ jobs:
           
           git add .
           git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
-          git tag "v$new_version"
-          git push origin master --tags     
+          git push 
       
       # Publish
       - name: publish on version change
