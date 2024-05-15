@@ -22,6 +22,14 @@ public class MediatrHangfireBridge(IMediator mediator)
         await _mediator.Send(command);
     }
 
+    /// <summary>
+    /// Sends the specified command asynchronously through MediatR.
+    /// </summary>
+    /// <typeparam name="T">The type of response expected from the command.</typeparam>
+    /// <param name="command">The command to be sent through MediatR.</param>
+    /// <remarks>
+    /// This method sends the specified command asynchronously through MediatR, allowing for decoupled and asynchronous execution of application logic.
+    /// </remarks>
     public async Task SendAsync<T>(IRequest<T> command)
     {
         await _mediator.Send(command);
@@ -39,6 +47,15 @@ public class MediatrHangfireBridge(IMediator mediator)
         await _mediator.Send(command);
     }
 
+    /// <summary>
+    /// Sends the specified command asynchronously through MediatR with a custom job name.
+    /// </summary>
+    /// <typeparam name="T">The type of response expected from the command.</typeparam>
+    /// <param name="jobName">The name of the job being executed.</param>
+    /// <param name="command">The command to be sent through MediatR.</param>
+    /// <remarks>
+    /// This method sends the specified command asynchronously through MediatR with a custom job name, allowing for decoupled and asynchronous execution of application logic.
+    /// </remarks>
     [DisplayName("{0}")]
     public async Task SendAsync<T>(string jobName, IRequest<T> command)
     {
