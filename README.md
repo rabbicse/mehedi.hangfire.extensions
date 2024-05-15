@@ -44,7 +44,7 @@ Update `appsettings.json` with postgres connection string.
 
 ### Step 4
 Inside `Program.cs` file write the following code snippets.
-```
+```csharp
 builder.Services.AddHangfire(config =>
 {
     config.UsePostgreSqlStorage(c => c.UseNpgsqlConnection(builder.Configuration.GetConnectionString("HangfireConnection")));
@@ -54,14 +54,14 @@ builder.Services.AddHangfire(config =>
 
 and
 
-```
+```csharp
 app.UseHangfireServer();
 app.UseHangfireDashboard();
 ```
 
 ### Step 5
 Inside Controller simply enque requests like the following code snippets as an example.
-```
+```csharp
     [HttpPost("/sales/orders/{orderId:Guid}")]
     public IActionResult Action([FromRoute] Guid orderId)
     {
