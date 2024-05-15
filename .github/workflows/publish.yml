@@ -22,15 +22,34 @@ jobs:
           dotnet-version: 8.0.x
 
       # Increment the version
-      - name: Bump version and push tag
-        id: bump_version
-        uses: dotnet/versionsweeper@v1
-        with:
-          path: 'src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj'
-          version-regex: '<Version>(.*)<\/Version>'
-          bump: 'patch' # Set this to 'patch', 'minor', or 'major' depending on your versioning strategy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Bump version and push tag
+      #   id: bump_version
+      #   uses: dotnet/versionsweeper@v1
+      #   with:
+      #     path: 'src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj'
+      #     version-regex: '<Version>(.*)<\/Version>'
+      #     bump: 'patch' # Set this to 'patch', 'minor', or 'major' depending on your versioning strategy
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            # Increment the version
+      - name: Bump version
+        run: |
+          version=$(grep -oP '(?<=<Version>)[^<]+' src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj)
+          IFS='.' read -ra ADDR <<< "$version"
+          major=${ADDR[0]}
+          minor=${ADDR[1]}
+          patch=${ADDR[2]}
+          new_patch=$((patch + 1))
+          new_version="$major.$minor.$new_patch"
+          sed -i "s/<Version>$version<\/Version>/<Version>$new_version<\/Version>/" src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
+          git commit -m "Bump version to $new_version"
+          git tag "v$new_version"
+          git push origin master --tags
+        shell: bash
       
       # Publish
       - name: publish on version change
