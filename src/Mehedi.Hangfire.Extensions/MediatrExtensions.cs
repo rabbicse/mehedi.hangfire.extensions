@@ -9,6 +9,11 @@ namespace Mehedi.Hangfire.Extensions;
 /// </summary>
 public static class MediatrExtensions
 {
+    /// <summary>
+    /// Enqueues a MediatR command as a Hangfire job.
+    /// </summary>
+    /// <param name="mediator">The <see cref="IMediator"/> instance to use for sending the command.</param>
+    /// <param name="request">The MediatR command to be enqueued.</param>
     public static void Enqueue(this IMediator mediator, string jobName, IRequest request)
     {
         var client = new BackgroundJobClient();
