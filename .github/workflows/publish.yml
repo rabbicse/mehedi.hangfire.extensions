@@ -32,31 +32,21 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # # Increment the version
-      # - name: Bump build version
-      #   id: bump
-      #   uses: vers-one/dotnet-project-version-updater@v1.6
-      #   with:
-      #     file: "src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj"
-      #     version: bump-build
-
-      # - run: |
-      #     git config user.name "Md Mehedi Hasan"
-      #     git config user.email "rabbi.se@gmail.com"
-      #     git add .
-      #     git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
-      #     git push
-            # Increment the version
-      - name: Bump version and push tag
-        id: bump_version
-        uses: dotnet/versionsweeper@v1
+      # Increment the version
+      - name: Bump build version
+        id: bump
+        uses: vers-one/dotnet-project-version-updater@v1.6
         with:
-          path: 'src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj'
-          version-regex: '<Version>(.*)<\/Version>'
-          bump: 'patch' # Can be 'patch', 'minor', or 'major'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
+          file: "src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj"
+          version: bump-build
+
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
+          git tag "v$new_version"
+          git push origin master --tags        
       
       # Publish
       - name: publish on version change
