@@ -41,7 +41,7 @@ jobs:
       # Publish
       - name: publish on version change
         run: |
-          dotnet nuget push Mehedi.Hangfire.Extensions.*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          dotnet nuget *.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
         # id: publish_nuget
         # uses: brandedoutcast/publish-nuget@v2
         # with:
