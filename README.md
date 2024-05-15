@@ -24,7 +24,7 @@ Either commands, from Package Manager Console or .NET Core CLI, will download an
 ### Step 1
 Create ASP.NET Core API project. Then install the following dependencies with the following commands.
 ```
-dotnet add package Hangfire
+dotnet add package Hangfire.AspNetCore
 dotnet add package Mehedi.Hangfire.Extensions
 ```
 
