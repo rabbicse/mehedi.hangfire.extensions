@@ -24,10 +24,11 @@ jobs:
       # Increment the version
       - name: Bump version and push tag
         id: bump_version
-        uses: phips28/gh-action-bump-version@v9.0.0
+        uses: dotnet/versionsweeper@v1
         with:
-          release-type: 'patch' # Set this to 'patch', 'minor', or 'major' depending on your versioning strategy
-          files: 'src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj'
+          path: 'src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj'
+          version-regex: '<Version>(.*)<\/Version>'
+          bump: 'patch' # Set this to 'patch', 'minor', or 'major' depending on your versioning strategy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
