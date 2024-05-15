@@ -2,11 +2,10 @@ name: publish Mehedi.Hangfire.Extensions to nuget
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]    
+    branches: 
+      - master
     paths:
       - 'src/Mehedi.Hangfire.Extensions/**'
-  pull_request:
-      branches: [ master ]
       
 jobs:
   publish:
