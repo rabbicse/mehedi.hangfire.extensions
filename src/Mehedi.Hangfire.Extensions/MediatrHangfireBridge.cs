@@ -5,6 +5,7 @@ namespace Mehedi.Hangfire.Extensions;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="MediatrHangfireBridge"/> class.
+/// 
 /// Source: https://gist.github.com/dcomartin/8ddbd86a7df893cfcef38b6fa06dd8ea#file-mediatorhangfirebridge-cs
 /// </summary>
 /// <param name="mediator">An instance of <see cref="IMediator"/> to send commands.</param>
