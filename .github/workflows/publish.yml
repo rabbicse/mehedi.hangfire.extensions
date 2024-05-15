@@ -32,20 +32,31 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # Increment the version
+      # Increment the version
       - name: Bump version
         run: |
-          version=$(grep -oP '(?<=<Version>)[^<]+' src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj)
-          IFS='.' read -ra ADDR <<< "$version"
-          major=${ADDR[0]}
-          minor=${ADDR[1]}
-          patch=${ADDR[2]}
+          VERSION_FILE=src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
+          VERSION_REGEX='<Version>(.*)<\/Version>'
+          
+          # Extract the current version
+          current_version=$(grep -oP "$VERSION_REGEX" $VERSION_FILE | sed -E "s/$VERSION_REGEX/\1/")
+          
+          # Split the version into components
+          IFS='.' read -r major minor patch <<< "$current_version"
+          
+          # Increment the patch version
           new_patch=$((patch + 1))
           new_version="$major.$minor.$new_patch"
-          sed -i "s/<Version>$version<\/Version>/<Version>$new_version<\/Version>/" src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
+          
+          # Update the version in the .csproj file
+          sed -i "s/<Version>$current_version<\/Version>/<Version>$new_version<\/Version>/" $VERSION_FILE
+          
+          # Configure git
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
+          
+          # Commit and tag the new version
+          git add $VERSION_FILE
           git commit -m "Bump version to $new_version"
           git tag "v$new_version"
           git push origin master --tags
