@@ -22,6 +22,11 @@ public class MediatrHangfireBridge(IMediator mediator)
         await _mediator.Send(command);
     }
 
+    public async Task SendAsync<T>(IRequest<T> command)
+    {
+        await _mediator.Send(command);
+    }
+
     /// <summary>
     /// Sends a MediatR command as a Hangfire job, with a specified job name.
     /// </summary>
@@ -30,6 +35,12 @@ public class MediatrHangfireBridge(IMediator mediator)
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     [DisplayName("{0}")]
     public async Task SendAsync(string jobName, IRequest command)
+    {
+        await _mediator.Send(command);
+    }
+
+    [DisplayName("{0}")]
+    public async Task SendAsync<T>(string jobName, IRequest<T> command)
     {
         await _mediator.Send(command);
     }

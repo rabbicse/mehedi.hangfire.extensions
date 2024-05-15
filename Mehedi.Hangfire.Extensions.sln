@@ -13,6 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{C8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangfire.Extensions.Example", "examples\Hangfire.Extensions.Example\Hangfire.Extensions.Example.csproj", "{4F845282-4F11-4BDF-8748-8F82CC21880D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E69D317B-CEDB-443A-98A8-12512A1C0B53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{04A31F4A-CF20-4175-A104-9A2B07632B0A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B3A4D60F-0C36-4740-978C-99F16181AD27} = {955AAFD3-F0D7-4806-9FF7-41E7C24398E3}
 		{4F845282-4F11-4BDF-8748-8F82CC21880D} = {C84E86A6-5864-4D63-B378-0C8721E9C060}
+		{04A31F4A-CF20-4175-A104-9A2B07632B0A} = {E69D317B-CEDB-443A-98A8-12512A1C0B53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93C0B967-A5A7-4C60-A013-D428B1890F90}
