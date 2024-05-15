@@ -4,8 +4,8 @@ on:
   push:
     branches: 
       - master
-    # paths:
-    #   - 'src/Mehedi.Hangfire.Extensions/**'
+    paths:
+      - 'src/Mehedi.Hangfire.Extensions/**'
       
 jobs:
   publish:
