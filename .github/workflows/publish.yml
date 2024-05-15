@@ -32,35 +32,21 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # Increment the version
-      - name: Bump version
-        run: |
-          VERSION_FILE=src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
-          VERSION_REGEX='<Version>(.*)<\/Version>'
-          
-          # Extract the current version
-          current_version=$(grep -oP "$VERSION_REGEX" $VERSION_FILE | sed -E "s/$VERSION_REGEX/\1/")
-          
-          # Split the version into components
-          IFS='.' read -r major minor patch <<< "$current_version"
-          
-          # Increment the patch version
-          new_patch=$((patch + 1))
-          new_version="$major.$minor.$new_patch"
-          
-          # Update the version in the .csproj file
-          sed -i "s/<Version>$current_version<\/Version>/<Version>$new_version<\/Version>/" $VERSION_FILE
-          
-          # Configure git
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          
-          # Commit and tag the new version
-          git add $VERSION_FILE
-          git commit -m "Bump version to $new_version"
-          git tag "v$new_version"
-          git push origin master --tags
-        shell: bash
+      # Increment the version
+      - name: Bump build version
+        id: bump
+        uses: vers-one/dotnet-project-version-updater@v1.6
+        with:
+          file: "src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj"
+          version: bump-build
+
+      - run: |
+          git config user.name "Md Mehedi Hasan"
+          git config user.email "rabbi.se@gmail.com"
+          git add .
+          git commit -m "Bump project version to ${{ steps.bump.outputs.newVersion }}"
+          git push
+        
       
       # Publish
       - name: publish on version change
