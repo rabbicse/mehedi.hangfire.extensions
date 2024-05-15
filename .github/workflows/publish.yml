@@ -22,17 +22,6 @@ jobs:
           dotnet-version: 8.0.x
 
       # Increment the version
-      # - name: Bump version and push tag
-      #   id: bump_version
-      #   uses: dotnet/versionsweeper@v1
-      #   with:
-      #     path: 'src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj'
-      #     version-regex: '<Version>(.*)<\/Version>'
-      #     bump: 'patch' # Set this to 'patch', 'minor', or 'major' depending on your versioning strategy
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Increment the version
       - name: Bump build version
         id: bump
         uses: vers-one/dotnet-project-version-updater@v1.6
@@ -61,3 +50,4 @@ jobs:
           TAG_COMMIT: true # Flag to enable / disable git tagging
           TAG_FORMAT: v* # Format of the git tag, [*] gets replaced with version
           NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key
+          continue-on-error: true
