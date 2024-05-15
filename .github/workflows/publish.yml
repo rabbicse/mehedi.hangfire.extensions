@@ -32,7 +32,7 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Increment the version
+            # Increment the version
       - name: Bump version
         run: |
           VERSION_FILE=src/Mehedi.Hangfire.Extensions/Mehedi.Hangfire.Extensions.csproj
