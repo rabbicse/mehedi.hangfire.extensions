@@ -67,7 +67,7 @@ public class PlaceOrder : IRequest
 }
 ```
 
-### Step 5
+### Step 6
 Inside Controller simply enque requests like the following code snippets as an example.
 ```csharp
     [HttpPost("/sales/orders/{orderId:Guid}")]
