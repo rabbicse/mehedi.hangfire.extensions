@@ -50,13 +50,21 @@ builder.Services.AddHangfire(config =>
     config.UsePostgreSqlStorage(c => c.UseNpgsqlConnection(builder.Configuration.GetConnectionString("HangfireConnection")));
     config.UseMediatR(); // Custom extension built on 
 });
+builder.Services.AddHangfireServer();
 ```
 
 and
 
 ```csharp
-app.UseHangfireServer();
 app.UseHangfireDashboard();
+```
+### Step 5
+Add PlaceOrder class as the following code snippet
+```csharp
+public class PlaceOrder : IRequest
+{
+    public Guid OrderId { get; set; }
+}
 ```
 
 ### Step 5
@@ -70,7 +78,7 @@ Inside Controller simply enque requests like the following code snippets as an e
             OrderId = orderId
         });
 
-        return NoContent();
+        return Ok($"Job created");
     }
 ```
 
