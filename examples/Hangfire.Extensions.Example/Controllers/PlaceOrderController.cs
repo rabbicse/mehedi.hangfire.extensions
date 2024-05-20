@@ -39,18 +39,18 @@ public class PlaceOrderController : ControllerBase
             OrderId = orderId
         });
 
-        return NoContent();
+        return Ok($"Job created");
     }
 
     [HttpPost("/sales/neworders/{orderId:Guid}")]
     public IActionResult OrderAction([FromRoute] Guid orderId)
     {
-        _mediator.Enqueue("Place Order", new PlaceOrders
+        var jobId = _mediator.Enqueue("Place Order", new PlaceOrders
         {
             OrderId = orderId
         });
 
-        return NoContent();
+        return Ok($"Job created. Job Id: {jobId}");
     }
 }
 
