@@ -1,4 +1,5 @@
 ﻿using Hangfire;
+using Hangfire.Storage.Monitoring;
 
 namespace Mehedi.Hangfire.Extensions;
 
@@ -20,5 +21,13 @@ public static class HangfireUtils
         }
 
         return jobData.History.FirstOrDefault()?.StateName;
+    }
+
+    public static StateHistoryDto? GetJobDetailsById(string jobId)
+    {
+        var monitor = JobStorage.Current.GetMonitoringApi();
+
+        var jobData = monitor.JobDetails(jobId);
+        return jobData == null ? throw new KeyNotFoundException("Job not found!") : (jobData.History.FirstOrDefault());
     }
 }
