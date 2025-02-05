@@ -13,6 +13,46 @@ public static class MediatrExtensions
     /// Enqueues a mediator request to be processed by Hangfire with a specified job name.
     /// </summary>
     /// <param name="mediator">The instance of the mediator used to send the request.</param>
+    /// <param name="queue">The name assigned to the hangfire queue.</param>
+    /// <param name="jobName">The name assigned to the background job.</param>
+    /// <param name="request">The mediator request to be enqueued.</param>
+    /// <returns>The unique identifier of the enqueued background job.</returns>
+    /// <remarks>
+    /// This method uses Hangfire's <see cref="BackgroundJobClient"/> to enqueue a job that
+    /// will send the given mediator request asynchronously through the <see cref="MediatrHangfireBridge"/>
+    /// with the specified job name.
+    /// </remarks>
+    public static string Enqueue(this IMediator mediator, string queue, string jobName, IRequest request)
+    {
+        var client = new BackgroundJobClient();
+        return client.Enqueue<MediatrHangfireBridge>(queue, bridge => bridge.SendAsync(jobName, request));
+    }
+
+    /// <summary>
+    /// Enqueues a mediator request to be processed by Hangfire with a specified job name.
+    /// </summary>
+    /// <typeparam name="T">The response type of the mediator request.</typeparam>
+    /// <param name="mediator">The instance of the mediator used to send the request.</param>
+    /// <param name="queue">The name assigned to the hangfire queue.</param>
+    /// <param name="jobName">The name assigned to the background job.</param>
+    /// <param name="request">The mediator request to be enqueued.</param>
+    /// <returns>The unique identifier of the enqueued background job.</returns>
+    /// <remarks>
+    /// This method uses Hangfire's <see cref="BackgroundJobClient"/> to enqueue a job that
+    /// will send the given mediator request asynchronously through the <see cref="MediatrHangfireBridge"/>
+    /// with the specified job name.
+    /// </remarks>
+    public static string Enqueue<T>(this IMediator mediator, string queue, string jobName, IRequest<T> request)
+    {
+        var client = new BackgroundJobClient();
+        return client.Enqueue<MediatrHangfireBridge>(queue, bridge => bridge.SendAsync(jobName, request));
+    }
+
+
+    /// <summary>
+    /// Enqueues a mediator request to be processed by Hangfire with a specified job name.
+    /// </summary>
+    /// <param name="mediator">The instance of the mediator used to send the request.</param>
     /// <param name="jobName">The name assigned to the background job.</param>
     /// <param name="request">The mediator request to be enqueued.</param>
     /// <returns>The unique identifier of the enqueued background job.</returns>
